@@ -4,7 +4,13 @@ Simple and opinionated CLI tool which changes github contexts - Accounts and per
 
 ## Installation
 
-Build from source:
+Using Cargo:
+
+```bash
+cargo install kalamarnica
+```
+
+Building from source:
 
 > [!NOTE]
 > [MSRV](https://github.com/foresterre/cargo-msrv) is 1.88.0
