@@ -5,6 +5,7 @@ edition = "2024"
 homepage = "https://github.com/Propfend/kalamarnica"
 repository = "https://github.com/Propfend/kalamarnica"
 readme = "README.md"
+license = "Apache-2.0"
 description = "GitHub CLI context switcher — manage multiple GitHub accounts"
 
 [dependencies]
