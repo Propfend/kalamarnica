@@ -4,19 +4,27 @@ Simple and opinionated CLI tool which changes github contexts - Accounts and per
 
 ## Installation
 
-Using Cargo:
+You can install the latest pre-built binary from [releases](https://github.com/Propfend/kalamarnica/releases).
+
+Build using Docker:
 
 ```bash
-cargo install kalamarnica
+docker build -t kalamarnica .
 ```
 
-Building from source:
+Build using Cargo:
 
 > [!NOTE]
 > [MSRV](https://github.com/foresterre/cargo-msrv) is 1.88.0
 
 > [!NOTE]
 > `kalamarnica` needs `zlib` for dynamic linker.
+
+```bash
+cargo install kalamarnica
+```
+
+Build from source repository:
 
 ```bash
 git clone https://github.com/Propfend/kalamarnica.git
