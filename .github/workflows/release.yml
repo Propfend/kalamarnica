@@ -10,6 +10,11 @@ jobs:
   build:
     name: build
     runs-on: ${{ matrix.os }}
+    permissions:
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+
     strategy:
       matrix:
         include:
@@ -37,6 +42,11 @@ jobs:
       - name: rename the binary
         run: mv ./target/release/kalamarnica ./${{ matrix.artifact_name }}
         shell: bash
+
+      - name: attest artifact build provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: ./${{ matrix.artifact_name }}
 
       - uses: intentee/release-action/assert-version@8125f727e97f72bfef24299d7c6d3217af1453bc
         with:
@@ -78,3 +88,4 @@ jobs:
           body: ${{ steps.release-version.outputs.description }}
           prerelease: ${{ steps.release-version.outputs.type == 'PRE_RELEASE' }}
           tag_name: ${{ github.ref }}
+
