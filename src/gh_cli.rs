@@ -96,9 +96,9 @@ fn ensure_users_map(host_mapping: &mut Mapping) -> Result<&mut Mapping> {
         .context("users entry is not a mapping")
 }
 
-pub struct GhCli;
+pub struct GhClient;
 
-impl GhCli {
+impl GhClient {
     pub fn auth_login_with_token(github_hostname: &str, token: &str) -> Result<()> {
         let current_user = fetch_api_user(github_hostname, token)?;
 

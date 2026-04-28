@@ -3,7 +3,7 @@ use clap::Parser;
 use indoc::formatdoc;
 
 use crate::cmd::handler::Handler;
-use crate::gh_cli::GhCli;
+use crate::gh_cli::GhClient;
 use crate::storage::Storage;
 
 #[derive(Parser)]
@@ -34,7 +34,7 @@ impl AuthStatus {
                 false => "none (using shared keyring)",
             };
 
-            let is_authenticated = GhCli::auth_status(&context.hostname)
+            let is_authenticated = GhClient::auth_status(&context.hostname)
                 .map(|auth_status_output| {
                     auth_status_output.contains(&format!(
                         "Logged in to {} account {}",

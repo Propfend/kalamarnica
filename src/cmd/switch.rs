@@ -4,7 +4,7 @@ use clap::Parser;
 use indoc::indoc;
 
 use crate::cmd::handler::Handler;
-use crate::gh_cli::GhCli;
+use crate::gh_cli::GhClient;
 use crate::storage::Storage;
 
 #[derive(Parser)]
@@ -28,7 +28,7 @@ impl Switch {
         storage.set_active(&self.name)?;
 
         if let Some(stored_token) = storage.read_token(&self.name)? {
-            match GhCli::auth_login_with_token(&context.hostname, &stored_token) {
+            match GhClient::auth_login_with_token(&context.hostname, &stored_token) {
                 Ok(()) => log::warn!("Applied stored token for '{}'", &self.name),
                 Err(login_error) => {
                     log::warn!(
@@ -76,14 +76,14 @@ impl Handler for Switch {
 }
 
 fn verify_auth(github_hostname: &str, user: &str) -> Result<()> {
-    let auth_status_output = GhCli::auth_status(github_hostname)?;
+    let auth_status_output = GhClient::auth_status(github_hostname)?;
     if !auth_status_output.contains(&format!("Logged in to {github_hostname} account {user}")) {
         bail!("not logged in as {user}");
     }
 
-    GhCli::auth_switch(github_hostname, user)?;
+    GhClient::auth_switch(github_hostname, user)?;
 
-    let authenticated_user = GhCli::api_user(github_hostname)?;
+    let authenticated_user = GhClient::api_user(github_hostname)?;
     if authenticated_user != user {
         bail!("expected user {user}, got {authenticated_user}");
     }
