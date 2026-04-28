@@ -8,7 +8,7 @@ use clap::Parser;
 use crate::cmd::handler::Handler;
 use crate::cmd::validate_name::validate_name;
 use crate::context::Context;
-use crate::gh_cli::GhCli;
+use crate::gh_cli::GhClient;
 use crate::storage::Storage;
 use crate::transport::Transport;
 
@@ -54,7 +54,7 @@ impl Create {
                         bail!("GH_HOST contains invalid unicode: {}", raw_value.display())
                     }
                 };
-                let user = GhCli::api_user(&hostname)?;
+                let user = GhClient::api_user(&hostname)?;
 
                 (hostname, user)
             }
