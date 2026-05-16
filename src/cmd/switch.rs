@@ -28,7 +28,7 @@ impl Switch {
 
     pub fn execute(&self, storage: &Storage) -> Result<()> {
         if !storage.context_exists(&self.name, self.vcs)? {
-            bail!("context '{}' does not exist", &self.name);
+            bail!("context '{}' does not exist", self.name);
         }
 
         let context = storage.read_context(&self.name, self.vcs)?;
@@ -52,11 +52,11 @@ impl Switch {
                 ),
             };
             match credential_result {
-                Ok(()) => log::warn!("Applied stored token for '{}'", &self.name),
+                Ok(()) => log::warn!("Applied stored token for '{}'", self.name),
                 Err(credential_error) => {
                     log::warn!(
                         "Failed to apply stored token for '{}': {}",
-                        &self.name,
+                        self.name,
                         credential_error
                     );
                 }
@@ -70,7 +70,7 @@ impl Switch {
         if let Err(default_host_error) = default_host_result {
             log::warn!(
                 "Failed to set default VCS host for '{}': {}",
-                &self.name,
+                self.name,
                 default_host_error
             );
         }
@@ -100,11 +100,11 @@ impl Switch {
 
         log::info!(
             "Switched to context '{}' ({}@{}, {}, {})",
-            &self.name,
+            self.name,
             context.user,
             context.hostname,
             context.transport,
-            &self.vcs,
+            self.vcs,
         );
 
         Ok(())
