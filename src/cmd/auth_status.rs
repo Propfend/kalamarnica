@@ -47,13 +47,12 @@ impl AuthStatus {
                     Vcs::Github => GhClient::auth_status(&context.hostname),
                     Vcs::Gitlab => GlClient::auth_status(&context.hostname),
                 }
-                .map(|output| {
+                .is_ok_and(|output| {
                     output.contains(&format!(
                         "Logged in to {} account {}",
                         context.hostname, context.user
                     ))
-                })
-                .unwrap_or(false);
+                });
 
                 let auth_info = match is_authenticated {
                     true => "verified".to_owned(),
