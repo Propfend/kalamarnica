@@ -30,7 +30,7 @@
 
         meta = {
           description = "Simple and opinionated CLI tool which changes github contexts - Accounts and per-account tokens (permissions). It currently supports Github and Gitlab.";
-          homepage = "https://github.com/fangen/kalamarnica";
+          homepage = "https://github.com/zaryo/kalamarnica";
           license = pkgs.lib.licenses.asl20;
         };
       };
